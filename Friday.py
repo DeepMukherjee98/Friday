@@ -6,6 +6,7 @@ import calendar
 from datetime import date, datetime
 from googlesearch import search
 import webbrowser
+import smtplib
 
 #import vlc
 
@@ -138,5 +139,17 @@ while True:
         webbrowser.open(site[0])
         webbrowser.open(site[1])
 
+    elif "mail" in x or "email" in x:
+        y=input("Please type the receiver's mail id or multiple ids : ")
+        li = list(y.split(" ")
+        y=input("Please input sender's mail : ")
+        z=input("Please input the password : ")
+        for dest in li:
+            s= smtplib.SMTP_SSL('smtp.gmail.com', 465)
+            s.login(y,z)
+            message =input("Please input the message : ")
+            s.sendmail(y, dest, message)
+            s.quit()
+            
     else :
         p.speak("Don't Support yet")
