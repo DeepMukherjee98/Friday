@@ -4,6 +4,8 @@ import random
 import math
 import calendar
 from datetime import date, datetime
+from googlesearch import search
+import webbrowser
 
 #import vlc
 
@@ -124,6 +126,17 @@ while True:
         born = datetime.strptime(date, '%d %m %Y').weekday()
         t="The day should be "+str(calendar.day_name[born])
         p.speak(t)
+
+    elif "search" in x or "google":
+        query = x[8:]
+        site=[]
+        for j in search(query, tld="co.in", num=5, stop=5, pause=2):
+            site.append(j)
+        p.speak("Here are top 5 sites")
+        print(*site, sep="\n")
+        p.speak("Opening The top two results")
+        webbrowser.open(site[0])
+        webbrowser.open(site[1])
 
     else :
         p.speak("Don't Support yet")
